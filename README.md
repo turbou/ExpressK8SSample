@@ -187,7 +187,7 @@ Contrastサーバにオンボードされていることを確認します。
 1. AgentInjectorを削除します。  
     これによって、Contrastエージェントのない状態に戻ります。アプリの再起動が行われます。  
     ```bash
-    kubectl -n default delete agentinjector injector-for-petclinic
+    kubectl -n default delete agentinjector injector-for-express
     ```
 2. サービスを停止します。
     ```bash
@@ -196,9 +196,9 @@ Contrastサーバにオンボードされていることを確認します。
 3. AgentConfigurationを削除します。
     ```bash
     # 存在確認
-    kubectl get agentconfigurations petclinic-agent-configuration
+    kubectl get agentconfigurations nodejs-agent-configuration
     # 削除
-    kubectl delete agentconfigurations petclinic-agent-configuration
+    kubectl delete agentconfigurations nodejs-agent-configuration
     ```
 4. kubectlのSecretを削除します。 (残していても問題ないです)
     ```bash
