@@ -13,55 +13,27 @@ Mac Docker Desktopで動作確認済み
 docker desktopの設定画面でKubernetesを有効化しておいてください。
 
 ## 大まかな流れ
-1. PetClinicのデプロイ  
-  PetClinicのJarビルドからDockerイメージ化、そしてKubernetesへのデプロイ
+1. Expressサンプルアプリのデプロイ  
+  ExpressサンプルアプリのKubernetesへのデプロイ
 
 2. Contrastエージェントオペレータのセットアップ  
   エージェントオペレータのインストールとセットアップまで
 
-3. PetClinicへのエージェントの組み込み  
-  ContrastエージェントオペレータをPetClinicを接続します。
+3. Expressサンプルアプリへのエージェントの組み込み  
+  ContrastエージェントオペレータをExpressサンプルアプリを接続します。
 
 4. Contrastサーバのオンボード確認  
   オンボード確認と打鍵を行い脆弱性が検知されるまでを確認します。
 
-## 1. PetClinicのデプロイ
-### jarの作成とDockerイメージの作成
-- Jarビルド  
-  README.mdがある階層の１つ上で作業してください。  
-  ```bash
-  mvn clean package -DskipTests
-  ```
-  SpringBoodで動作させる場合は（おまけ）  
-  ```bash
-  java -jar ./target/spring-petclinic-1.5.1.jar --server.port=8001
-  ```
-  http://localhost:8001
+## 1. Expressサンプルアプリのデプロイ
+### Dockerイメージの作成
 - Dockerビルド  
-  続けて同じ階層で作業してください。
   ```bash
   # Dockerイメージの作成
-  docker build -t petclinic_docker .
-  
-  # Contrastエージェント組み込みのDockerイメージを作る場合（おまけ）
-  docker build -f Dockerfile_with_JavaAgent --build-arg CONTRAST_AGENT_VERSION=4.7.1 -t petclinic_docker_with_agent . 
+  docker-compose build --no-cache
   ```
-  Dockerコンテナで動作させる場合は（おまけ）  
-  ```bash
-  docker run -p 8001:8000 petclinic_docker:latest
-  
-  # Contrastエージェント組み込みのDockerコンテナを起動する場合（おまけ）
-  docker run -p 8001:8000 \
-  -e CONTRAST__API__API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
-  -e CONTRAST__API__SERVICE_KEY=YYYYYYYYYYYYYYYY \
-  -e CONTRAST__API__URL=https://eval.contrastsecurity.com/Contrast \
-  -e CONTRAST__API__USER_NAME=XXXXX@contrastsecurity.com \
-  petclinic_docker_with_agent:latest
-  ```
-  http://localhost:8001
 
-### PetClinicのデプロイ
-このREADME.mdのある階層に戻って作業します。
+### Expressサンプルアプリのデプロイ
 - デプロイ  
   ```bash
   kubectl apply -f deployment.yaml
@@ -72,8 +44,9 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   # 事前にyaml内のCONTRAST__API__API_KEYなどの値を設定しておいてください。
   kubectl apply -f deployment_with_agent.yaml
   ```
-  ここでPetClinicを閲覧することもできます。  
-  http://localhost:30000/
+  ここでExpressサンプルアプリを閲覧することもできます。  
+  http://localhost:30000/  
+  Hello Worldとでるだけです。
 
 ## 2. Contrastエージェントオペレータのセットアップ
 ### エージェントオペレータのインストール
