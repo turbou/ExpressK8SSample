@@ -29,13 +29,17 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
 ### Dockerイメージの作成
 - Dockerビルド  
   ```bash
-  # Dockerイメージの作成
+  # Dockerイメージの作成(front)
+  cd front
+  docker-compose build --no-cache
+  cd ../back
   docker-compose build --no-cache
   ```
 
 ### Expressサンプルアプリのデプロイ
 - デプロイ  
   ```bash
+  cd ../
   kubectl apply -f deployment.yaml
   # Podのステータス確認
   kubectl get pods
