@@ -50,7 +50,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   ```
   ここでExpressサンプルアプリを閲覧することもできます。  
   http://localhost:30000/  
-  Hello Worldとでるだけです。
+  Hello Contrastとでるだけです。
 
 ## 2. Contrastエージェントオペレータのセットアップ
 ### エージェントオペレータのインストール
