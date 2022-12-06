@@ -10,7 +10,7 @@ let http = require('http');
 const URL = 'http://127.0.0.1:3001/';
 //const URL = 'http://express-back:3001/';
 app.get('/', (req, res) => {
-  // res.send('Hello Oyoyo');
+  // res.send('Hello Contrast');
   http.get(URL, function(res2) {
     console.log('Status: ' + res2.statusCode);
     console.log('Headers: ' + JSON.stringify(res2.headers));

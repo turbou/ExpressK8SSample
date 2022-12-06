@@ -22,12 +22,18 @@ spec:
         image: express_front:1.0.0
         imagePullPolicy: IfNotPresent
         resources: {}
+        env:
+        - name: CONTRAST_AGENT_TELEMETRY_OPTOUT
+          value: "true"
         ports:
         - containerPort: 3000
       - name: express-back
         image: express_back:1.0.0
         imagePullPolicy: IfNotPresent
         resources: {}
+        env:
+        - name: CONTRAST_AGENT_TELEMETRY_OPTOUT
+          value: "true"
 status: {}
 ---
 apiVersion: v1
