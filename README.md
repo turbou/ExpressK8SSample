@@ -125,14 +125,14 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   apiVersion: agents.contrastsecurity.com/v1beta1
   kind: AgentConfiguration
   metadata:
-    name: petclinic-agent-configuration
+    name: nodejs-agent-configuration
     namespace: default
   spec:
     yaml: |
       server:
-        environment: production
+        environment: qa
       application:
-        name: k8s_PetClinic
+        name: k8s_ExpressSample
       assess:
         enable: true
       protect:
@@ -144,9 +144,9 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
 - エージェント設定の確認（任意）  
   ```bash
   # 存在確認
-  kubectl get agentconfigurations petclinic-agent-configuration
+  kubectl get agentconfigurations nodejs-agent-configuration
   # 詳細を確認する場合
-  kubectl describe agentconfigurations/petclinic-agent-configuration
+  kubectl describe agentconfigurations/nodejs-agent-configuration
   ```
 - エージェントの組み込み  
   **（注意）エージェントを組み込む際に対象アプリケーションの再起動が行われます。**  
@@ -156,17 +156,17 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   apiVersion: agents.contrastsecurity.com/v1beta1
   kind: AgentInjector
   metadata:
-    name: injector-for-petclinic
+    name: injector-for-express
     namespace: default
   spec:
-    type: java
+    type: nodejs
     version: latest
     selector:
       labels:
         - name: app
-          value: petclinic-agent-operator-demo
+          value: express-agent-operator-demo
     configuration:
-      name: petclinic-agent-configuration
+      name: nodejs-agent-configuration
   EOF
   ```
 - PetClinicのログを確認  
