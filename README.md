@@ -1,6 +1,6 @@
 # Contrastエージェントオペレータデモ（Kubernetes編）
 ## 概要
-Kubernetes上で稼働するPetClinicにKubernetesオペレータの仕組みを使ってContrastエージェントを  
+Kubernetes上で稼働するExpressサンプルアプリにKubernetesオペレータの仕組みを使ってContrastエージェントを  
 組み込む手順について説明します。  
 Contrastエージェントオペレータについては以下のドキュメントにも詳細な説明があります。  
 https://docs.contrastsecurity.jp/ja/agent-operator.html  
@@ -117,7 +117,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   kubectl -n contrast-agent-operator get clusteragentconnections default-agent-connection
   ```
 
-## 3. PetClinicへのエージェントの組み込み
+## 3. Expressサンプルアプリへのエージェントの組み込み
 - エージェントへの設定  
   **yaml: |の中身はcontrast_security.yamlと同じ設定が書けるようになっています。**
   ```yaml
@@ -169,9 +169,9 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
       name: nodejs-agent-configuration
   EOF
   ```
-- PetClinicのログを確認  
+- Expressサンプルアプリのログを確認  
   ```bash
-  kubectl logs -f Deployment/petclinic-agent-operator-demo
+  kubectl logs -f Deployment/nodejs-agent-operator-demo
   ```
 ## 4. Contrastサーバのオンボード確認
 http://localhost:30000/ に接続して適当に画面遷移してください。  
