@@ -1,6 +1,6 @@
 FROM node:16.14.0
 WORKDIR /usr/src/app
 COPY package.json .
-RUN npm install && npm install nodemon -g
+RUN npm install
 COPY ./src/ .
-CMD ["nodemon", "src/server.js"]
+CMD ["node", "server.js"]
