@@ -164,7 +164,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
     selector:
       labels:
         - name: app
-          value: express-agent-operator-demo
+          value: nodejs-agent-operator-demo
     configuration:
       name: nodejs-agent-configuration
   EOF
