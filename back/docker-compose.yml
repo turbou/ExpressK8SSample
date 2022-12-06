@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  back_app:
+    container_name: "express-back"
+    image: "express_back:1.0.0"
+    build: .
+    expose: 
+    - '3001'
+

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nodejs-agent-operator-demo
+  name: nodejs-agent-operator-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-agent-operator-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodejs-agent-operator-demo
+    spec:
+      containers:
+      - name: express-front
+        image: express_front:1.0.0
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        ports:
+        - containerPort: 3000
+      - name: express-back
+        image: express_back:1.0.0
+        imagePullPolicy: IfNotPresent
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nodejs-agent-operator-demo
+  name: nodejs-agent-operator-demo
+spec:
+  ports:
+  - name: 3000-3000
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: nodejs-agent-operator-demo
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+spec:
+  type: NodePort
+  selector:
+    app: nodejs-agent-operator-demo
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000
+
