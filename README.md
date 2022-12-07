@@ -166,7 +166,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
         name: k8s_ExpressSampleBack
       server:
         environment: development
-        name: k8s_nodejs_front
+        name: k8s_nodejs_back
       assess:
         enable: true
       protect:
