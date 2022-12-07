@@ -50,10 +50,12 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   http://localhost:30000/  
   Hello Contrast from Back とでるだけです。
 - Expressサンプルアプリのログを確認  
+  **Front**
   ```bash
-  # Front
   kubectl logs -f Deployment/nodejs-agent-operator-demo -c express-front
-  # Back
+  ```
+  **Back**
+  ```bash
   kubectl logs -f Deployment/nodejs-agent-operator-demo -c express-back
   ```
 ## 2. Contrastエージェントオペレータのセットアップ
