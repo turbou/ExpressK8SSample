@@ -2,6 +2,8 @@
 ## 概要
 Kubernetes上で稼働するExpressサンプルアプリにKubernetesオペレータの仕組みを使ってContrastエージェントを  
 組み込む手順について説明します。  
+**このプロジェクトはマルチコンテナポッドパターンの動作検証でもあります。**  
+
 Contrastエージェントオペレータについては以下のドキュメントにも詳細な説明があります。  
 https://docs.contrastsecurity.jp/ja/agent-operator.html  
 
@@ -119,54 +121,96 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
 
 ## 3. Expressサンプルアプリへのエージェントの組み込み
 - エージェントへの設定  
-  **yaml: |の中身はcontrast_security.yamlと同じ設定が書けるようになっています。**
+  **（Frontアプリ用）**
   ```yaml
   kubectl apply -f - <<EOF
   apiVersion: agents.contrastsecurity.com/v1beta1
   kind: AgentConfiguration
   metadata:
-    name: nodejs-agent-configuration
+    name: nodejs-agent-configuration-front
     namespace: default
   spec:
     yaml: |
-      server:
-        environment: qa
       application:
-        name: k8s_ExpressSample
+        name: k8s_ExpressSampleFront
+      server:
+        environment: development
       assess:
         enable: true
       protect:
         enable: true
-    suppressDefaultServerName: true
+    suppressDefaultServerName: false
     suppressDefaultApplicationName: false
-  EOF
+  EOF 
   ```
+  **（Backアプリ用）**
+  ```yaml
+  kubectl apply -f - <<EOF
+  apiVersion: agents.contrastsecurity.com/v1beta1
+  kind: AgentConfiguration
+  metadata:
+    name: nodejs-agent-configuration-back
+    namespace: default
+  spec:
+    yaml: |
+      application:
+        name: k8s_ExpressSampleBack
+      server:
+        environment: development
+      assess:
+        enable: true
+      protect:
+        enable: true
+    suppressDefaultServerName: false
+    suppressDefaultApplicationName: false
+  EOF 
+  ```
+  **yaml: |の中身はcontrast_security.yamlと同じ設定が書けるようになっています。**
 - エージェント設定の確認（任意）  
   ```bash
   # 存在確認
   kubectl get agentconfigurations nodejs-agent-configuration
   # 詳細を確認する場合
-  kubectl describe agentconfigurations/nodejs-agent-configuration
+  kubectl describe agentconfigurations/nodejs-agent-configuration-front
+  kubectl describe agentconfigurations/nodejs-agent-configuration-back
   ```
 - エージェントの組み込み  
   **（注意）エージェントを組み込む際に対象アプリケーションの再起動が行われます。**  
   *spec.versionがlatestになっていますが、ここでエージェントのバージョンを変更することもできます。例: 4.7.1*  
+  **（Frontアプリ用）**
   ```yaml
   kubectl apply -f - <<EOF
   apiVersion: agents.contrastsecurity.com/v1beta1
   kind: AgentInjector
   metadata:
-    name: injector-for-express
+    name: injector-for-express-front
     namespace: default
   spec:
     type: nodejs
     version: latest
     selector:
-      labels:
-        - name: app
-          value: nodejs-agent-operator-demo
+      images:
+        - express_front*
     configuration:
-      name: nodejs-agent-configuration
+      name: nodejs-agent-configuration-front
+  EOF
+  ```
+  **（Backアプリ用）**
+  ```yaml
+  kubectl apply -f - <<EOF
+  apiVersion: agents.contrastsecurity.com/v1beta1
+  kind: AgentInjector
+  metadata:
+    name: injector-for-express-back
+    namespace: default
+  spec:
+    type: nodejs
+    version: latest
+    selector:
+      images:
+        - express_back*
+    configuration:
+      name: nodejs-agent-configuration-back
   EOF
   ```
 - Expressサンプルアプリのログを確認  
