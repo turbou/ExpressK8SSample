@@ -1,8 +1,8 @@
 # Contrastエージェントオペレータデモ（Kubernetes編）
 ## 概要
-Kubernetes上で稼働するExpressサンプルアプリにKubernetesオペレータの仕組みを使ってContrastエージェントを  
-組み込む手順について説明します。  
-**このプロジェクトはマルチコンテナポッドパターンの動作検証でもあります。**  
+Kubernetes上で稼働するExpressサンプルアプリにKubernetesオペレータの仕組みを使って  
+Contrastエージェントオペレータを組み込む手順について説明します。  
+**マルチコンテナポッドパターンでのContrastサーバのオンボード検証用です。**  
 
 Contrastエージェントオペレータについては以下のドキュメントにも詳細な説明があります。  
 https://docs.contrastsecurity.jp/ja/agent-operator.html  
