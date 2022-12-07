@@ -49,7 +49,13 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   ここでExpressサンプルアプリを閲覧することもできます。  
   http://localhost:30000/  
   Hello Contrast from Back とでるだけです。
-
+- Expressサンプルアプリのログを確認  
+  ```bash
+  # Front
+  kubectl logs -f Deployment/nodejs-agent-operator-demo -c express-front
+  # Back
+  kubectl logs -f Deployment/nodejs-agent-operator-demo -c express-back
+  ```
 ## 2. Contrastエージェントオペレータのセットアップ
 ### エージェントオペレータのインストール
 参考URL: https://docs.contrastsecurity.jp/ja/install-agent-operator.html  
@@ -212,10 +218,6 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
     configuration:
       name: nodejs-agent-configuration-back
   EOF
-  ```
-- Expressサンプルアプリのログを確認  
-  ```bash
-  kubectl logs -f Deployment/nodejs-agent-operator-demo
   ```
 ## 4. Contrastサーバのオンボード確認
 http://localhost:30000/ に接続して適当に画面遷移してください。  
