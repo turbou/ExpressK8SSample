@@ -150,7 +150,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
         enable: true
     suppressDefaultServerName: false
     suppressDefaultApplicationName: false
-  EOF 
+  EOF
   ```
   **（Backアプリ用）**
   ```yaml
@@ -173,7 +173,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
         enable: true
     suppressDefaultServerName: false
     suppressDefaultApplicationName: false
-  EOF 
+  EOF
   ```
   **yaml: |の中身はcontrast_security.yamlと同じ設定が書けるようになっています。**
 - エージェント設定の確認（任意）  
