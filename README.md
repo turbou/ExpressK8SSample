@@ -179,7 +179,7 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
 - エージェント設定の確認（任意）  
   ```bash
   # 存在確認
-  kubectl get agentconfigurations nodejs-agent-configuration
+  kubectl get agentconfigurations
   # 詳細を確認する場合
   kubectl describe agentconfigurations/nodejs-agent-configuration-front
   kubectl describe agentconfigurations/nodejs-agent-configuration-back
