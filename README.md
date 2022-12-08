@@ -236,8 +236,13 @@ Contrastサーバにオンボードされていることを確認します。
 ## 後片付け
 1. AgentInjectorを削除します。  
     これによって、Contrastエージェントのない状態に戻ります。アプリの再起動が行われます。  
+    **（Frontアプリ用）**
     ```bash
-    kubectl -n default delete agentinjector injector-for-express
+    kubectl -n default delete agentinjector injector-for-express-front
+    ```
+    **（Backアプリ用）**
+    ```bash
+    kubectl -n default delete agentinjector injector-for-express-back
     ```
 2. サービスを停止します。
     ```bash
@@ -246,9 +251,10 @@ Contrastサーバにオンボードされていることを確認します。
 3. AgentConfigurationを削除します。
     ```bash
     # 存在確認
-    kubectl get agentconfigurations nodejs-agent-configuration
+    kubectl get agentconfigurations
     # 削除
-    kubectl delete agentconfigurations nodejs-agent-configuration
+    kubectl delete agentconfigurations nodejs-agent-configuration-front
+    kubectl delete agentconfigurations nodejs-agent-configuration-back
     ```
 4. kubectlのSecretを削除します。 (残していても問題ないです)
     ```bash
