@@ -228,8 +228,8 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   ```
 - Pod内のコンテナに入る場合
   ```bash
-  exec -i -t [Pod名] --container express-front -- /bin/bash
-  exec -i -t [Pod名] --container express-back -- /bin/bash
+  kubectl exec -i -t [Pod名] --container express-front -- /bin/bash
+  kubectl exec -i -t [Pod名] --container express-back -- /bin/bash
   ```
 ## 4. Contrastサーバのオンボード確認
 http://localhost:30000/ に接続して適当に画面遷移してください。  
