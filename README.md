@@ -34,9 +34,10 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   # Dockerイメージの作成(front)
   cd front
   docker-compose build --no-cache
+  # Dockerイメージの作成(back)
   cd ../back
   docker-compose build --no-cache
-  # イメージ確認
+  # Dockerイメージの確認
   docker images | grep express
   ```
 
