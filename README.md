@@ -36,6 +36,8 @@ docker desktopの設定画面でKubernetesを有効化しておいてくださ�
   docker-compose build --no-cache
   cd ../back
   docker-compose build --no-cache
+  # イメージ確認
+  docker images | grep express
   ```
 
 ### Expressサンプルアプリのデプロイ
